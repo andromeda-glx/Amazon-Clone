@@ -1,0 +1,159 @@
+header{
+    background-color: rgb(19, 25, 33);
+    padding: 0px 15px;
+    color: white;
+    padding: 0px 15px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+
+.header-link{
+    border: 1px solid transparent;
+    display: inline-block;
+    padding: 8px;
+    text-decoration: none;
+    color: white;
+}
+
+/* Left section */
+
+.header-left-section{
+    /* background-color: lightblue; */
+    width: 180px;
+    margin: 5px 0px;
+}
+
+.amazon-home-logo{
+    width: 100px;
+}
+
+.amazon-home-logo-sm{
+    display: none;
+}
+
+.header-link:hover{
+    border: 1px solid white;
+}
+
+@media (max-width: 800px){
+    .header-left-section{
+        width: unset;
+    }
+}
+
+/* Middle section */
+
+.header-middle-section{
+    flex: 1;
+
+    margin-right: 20px;
+    max-width: 800px;
+    margin-left: 10px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.search-bar{
+    height: 40px;
+    width: 100%;
+    border-radius: 5px 0px 0px 5px;
+    border: none;
+    padding-left: 20px;
+    font-size: 17px;
+}
+
+.search-btn{
+    height: 42px;
+    border: none;
+    width: 50px;
+    border-radius: 0px 5px 5px 0px;
+    padding: 10px;
+    background-color: rgb(254, 189, 105);
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-icon{
+    width: 100%;
+}
+
+/* Right section */
+
+.header-right-section{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.returns-text{
+    display: block;
+    font-size: 13px;
+}
+
+.orders-text{
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.cart-section{
+    display: flex;
+    flex-direction: row;
+
+    position: relative;
+}
+
+.cart-logo{
+    width: 50px;
+}
+
+.cart-quantity{
+    font-weight: 700;
+    color: rgb(240, 136, 4);
+    width: 50%;
+    text-align: center;
+
+    position: absolute;
+    top: 8px;
+    left: 13px;
+}
+
+.cart-text{
+    font-weight: 700;
+    margin-top: 20px;
+}
+
+.hamburger-btn{
+    display: none;
+}
+
+@media (max-width: 575px){
+    .header-right-section{
+        display: none;
+    }
+
+    .hamburger-btn{
+        display: block;
+    }
+
+    .amazon-home-logo{
+        display: none;
+    }
+
+    .amazon-home-logo-sm{
+        display: block;
+        width: 35px;
+    }
+}

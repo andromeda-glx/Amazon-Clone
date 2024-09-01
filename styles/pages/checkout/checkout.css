@@ -1,0 +1,160 @@
+main{
+    margin-top: 140px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 30px;
+    padding-right: 30px;
+    max-width: 1100px;
+}
+
+h2{
+    margin-bottom: 18px;
+}
+
+.order-review-c{
+    display: grid;
+    grid-template-columns: 1fr 310px;
+    column-gap: 10px;
+    align-items: start;
+}
+
+@media (max-width: 1000px){
+    main{
+        max-width: 500px;
+        padding-bottom: 50px;
+    }
+    
+    .order-review-c{
+        grid-template-columns: 1fr;
+        row-gap: 10px;
+    }
+}
+
+.order-items{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.order-item{
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 20px 15px;
+}
+.order-item>h3{
+    color: green;
+    margin-bottom: 20px;
+}
+
+.order-details-grid{
+    display: grid;
+    grid-template-columns: 100px 1fr 200px;
+    align-items: start;
+    column-gap: 20px;
+}
+
+.item-details{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.item-img{
+    width: 100%;
+}
+
+.item-name{
+    font-weight: bold;
+}
+
+.item-price{
+    font-weight: bold;
+    color: rgb(177, 39, 4);
+}
+
+.item-update,
+.item-delete{
+    color: rgb(21, 138, 184);
+    cursor: pointer;
+}
+
+.item-delivery-options{
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+}
+.item-delivery-options>p{
+    font-weight: bold;
+}
+
+.item-delivery-option{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.item-delivery-option>input{
+    height: 18px;
+    width: 18px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.delivery-time{
+    color: green;
+    font-weight: 500;
+}
+
+.delivery-price{
+    color: gray;
+    font-size: 15px;
+}
+
+.order-summary{
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 18px;
+
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+@media (max-width: 1000px){
+    .order-summary{
+        grid-row: 1;
+    }
+}
+
+.order-summary-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items:end;
+}
+
+.total-before-tax > 
+.price-row{
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+}
+
+.order-total{
+    color: rgb(177, 39, 4);
+    font-weight: 700;
+    font-size: 18px;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.place-your-order-btn{
+    border: none;
+    background-color: rgb(255, 216, 20);
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+.place-your-order-btn:hover{
+    background-color: rgb(243, 205, 16);
+}
