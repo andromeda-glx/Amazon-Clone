@@ -22,7 +22,7 @@ function generateDataStructureHTML() {
                 </div>
                 <div class="product-price">$${(product.priceCents / 100).toFixed(2)}</div>
                 <div class="product-quantity">
-                    <select>
+                <select class="js-quantity-selector-${product.id}">
                         <option selected value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -47,9 +47,13 @@ function addToCartEventListener() {
     document.querySelectorAll('.js-add-to-cart-btn')
         .forEach((btn) => {
             btn.addEventListener('click', () => {
-                addProductToTheCart(btn.dataset.productId, 1);
+                addProductToTheCart(btn.dataset.productId, getProductQuantity(btn.dataset.productId));
             });
         });
+}
+
+function getProductQuantity(productId){
+    return Number(document.querySelector(`.js-quantity-selector-${productId}`).value);
 }
 
 function addProductToTheCart(id, quantity) {
