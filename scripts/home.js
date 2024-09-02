@@ -1,3 +1,6 @@
+import {cart} from '../data/cart.js';
+import {products} from '../data/products.js';
+
 generateDataStructureHTML();
 addToCartEventListener();
 updateCartQuantity();
@@ -35,6 +38,10 @@ function generateDataStructureHTML() {
                         <option value="10">10</option>
                     </select>
                 </div>
+                <div class="added-to-cart js-added-to-cart-${product.id}">
+                    <img src="images/icons/checkmark.png">
+                    <div>Added</div>
+                </div>
                 <button class="add-to-cart-btn js-add-to-cart-btn" data-product-id="${product.id}">Add to Cart</button>
             </div>
         `;
@@ -46,8 +53,17 @@ function generateDataStructureHTML() {
 function addToCartEventListener() {
     document.querySelectorAll('.js-add-to-cart-btn')
         .forEach((btn) => {
+            let timeOut;
             btn.addEventListener('click', () => {
                 const productId = btn.dataset.productId;
+                const addedMessage = document.querySelector(`.js-added-to-cart-${productId}`);
+                addedMessage.classList.add('added-to-cart-visible');
+                clearTimeout(timeOut);
+
+                timeOut = setTimeout(() => {
+                    addedMessage.classList.remove('added-to-cart-visible');
+                }, 2000);
+
                 addProductToTheCart(productId, getProductQuantity(productId));
             });
         });

@@ -102,6 +102,22 @@ select{
     cursor: pointer;
 }
 
+.added-to-cart{
+    color: green;
+    opacity: 0;
+
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    column-gap: 5px;
+}
+.added-to-cart>img{
+    width: 20px;
+}
+.added-to-cart-visible{
+    opacity: 1;
+}
+
 .add-to-cart-btn{
     border: none;
     background-color: rgb(255, 216, 20);
@@ -115,6 +131,6 @@ select{
     background-color: rgb(247, 202, 0);
 }
 
-.product-spacer{
+/* .product-spacer{
     flex: 1;
-}
+} */
