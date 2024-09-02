@@ -1,4 +1,4 @@
-main{
+.products-grid{
     display: grid;
     grid-template-columns: repeat(7, 1fr);
 
@@ -6,37 +6,37 @@ main{
 }
 
 @media (max-width: 1599px) and (min-width: 1300px){
-    main{
+    .products-grid{
         grid-template-columns: repeat(6, 1fr);
     }
 }
 
 @media (max-width: 1299px) and (min-width: 1000px){
-    main{
+    .products-grid{
         grid-template-columns: repeat(5, 1fr);
     }
 }
 
 @media (max-width: 999px) and (min-width: 800px){
-    main{
+    .products-grid{
         grid-template-columns: repeat(4, 1fr);
     }
 }
 
 @media (max-width: 799px) and (min-width: 575px) {
-    main{
+    .products-grid{
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
 @media (max-width: 574px) and (min-width: 450px){
-    main{
+    .products-grid{
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 449px){
-    main{
+    .products-grid{
         grid-template-columns: 1fr;
     }
 }
