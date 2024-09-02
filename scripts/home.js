@@ -47,7 +47,8 @@ function addToCartEventListener() {
     document.querySelectorAll('.js-add-to-cart-btn')
         .forEach((btn) => {
             btn.addEventListener('click', () => {
-                addProductToTheCart(btn.dataset.productId, getProductQuantity(btn.dataset.productId));
+                const productId = btn.dataset.productId;
+                addProductToTheCart(productId, getProductQuantity(productId));
             });
         });
 }
