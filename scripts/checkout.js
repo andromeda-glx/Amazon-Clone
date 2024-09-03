@@ -1,5 +1,6 @@
 import {cart} from '../data/cart.js';
 import {products} from '../data/products.js';
+import { convertCentsToDollars } from './utils/money.js';
 
 generateHTMLCode();
 
@@ -18,7 +19,7 @@ function generateHTMLCode(){
 
                         <div class="item-details">
                             <div class="item-name">${product.name}</div>
-                            <div class="item-price">$${product.priceCents / 100}</div>
+                            <div class="item-price">$${convertCentsToDollars(product.priceCents)}</div>
                             <div class="item-quantity-update">
                                 Quantity: ${item.quantity}
                                 <span class="item-update">Update</span>

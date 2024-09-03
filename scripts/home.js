@@ -1,5 +1,6 @@
 import {cart, addProductToTheCart} from '../data/cart.js';
 import {products} from '../data/products.js';
+import { convertCentsToDollars } from './utils/money.js';
 
 generateDataStructureHTML();
 addToCartEventListener();
@@ -23,7 +24,7 @@ function generateDataStructureHTML() {
                     <img class="product-rating-star" src="./images/ratings/rating-${product.rating.stars * 10}.png" alt="">
                     <div class="product-rating-num">${product.rating.count}</div>
                 </div>
-                <div class="product-price">$${(product.priceCents / 100).toFixed(2)}</div>
+                <div class="product-price">$${convertCentsToDollars(product.priceCents)}</div>
                 <div class="product-quantity">
                 <select class="js-quantity-selector-${product.id}">
                         <option selected value="1">1</option>
