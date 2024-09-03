@@ -16,8 +16,14 @@ export function addProductToTheCart(id, quantity) {
             quantity
         });
     }
+    saveCartToLocalStorage();
 }
 
 export function deleteCartItem(itemIndex) {
     cart.splice(itemIndex, 1);
+    saveCartToLocalStorage();
+}
+
+export function saveCartToLocalStorage(){
+    localStorage.setItem('cart', JSON.stringify(cart));
 }

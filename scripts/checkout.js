@@ -1,12 +1,12 @@
-import {cart, deleteCartItem} from '../data/cart.js';
-import {products} from '../data/products.js';
+import { cart, deleteCartItem, saveCartToLocalStorage } from '../data/cart.js';
+import { products } from '../data/products.js';
 import { convertCentsToDollars } from './utils/money.js';
 
 let totalProductsNumber;
 let productTypeIndex;
 updateThePage();
 
-function generateHTMLCode(){
+function generateHTMLCode() {
     const orderItemsHTML = document.querySelector('.js-order-items');
     orderItemsHTML.innerHTML = '';
 
@@ -60,13 +60,13 @@ function generateHTMLCode(){
     });
 }
 
-function updateItemsNumber(){
+function updateItemsNumber() {
     document.querySelector('.js-total-products-number').innerHTML = totalProductsNumber;
 }
 
 function findProduct(productId) {
-    for (let i = 0; i < products.length; i++){
-        if (products[i].id === productId){
+    for (let i = 0; i < products.length; i++) {
+        if (products[i].id === productId) {
             return products[i];
         }
     }
@@ -77,19 +77,17 @@ function addDeleteEventListener() {
     document.querySelectorAll('.js-item-delete').forEach(deleteLink => {
         deleteLink.addEventListener('click', () => {
             const productIndex = deleteLink.dataset.productIndex;
-            
+
             deleteCartItem(Number(productIndex));
             updateThePage();
         });
     });
 }
 
-function updateThePage(){
+function updateThePage() {
     productTypeIndex = 0;
     totalProductsNumber = 0;
     generateHTMLCode();
     updateItemsNumber();
     addDeleteEventListener();
-
-    localStorage.setItem('cart', JSON.stringify(cart));
 }
