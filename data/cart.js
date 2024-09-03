@@ -17,3 +17,7 @@ export function addProductToTheCart(id, quantity) {
         });
     }
 }
+
+export function deleteCartItem(itemIndex) {
+    cart.splice(itemIndex, 1);
+}
