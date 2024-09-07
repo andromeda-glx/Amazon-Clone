@@ -24,6 +24,23 @@ export function deleteCartItem(itemIndex) {
     saveCartToLocalStorage();
 }
 
-export function saveCartToLocalStorage(){
+function saveCartToLocalStorage(){
     localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+export function getCartTotalQuantity(){
+    let totalQuantity = 0;
+    cart.forEach(item => totalQuantity += item.quantity);
+    return totalQuantity;
+}
+
+export function updateProductQuantity(productIndex, quantity){
+
+    if (quantity >= 0 && quantity < 1000){
+        cart[productIndex].quantity = quantity;
+        saveCartToLocalStorage();
+    }
+    else{
+        alert('Invalid quantity value.');
+    }
 }

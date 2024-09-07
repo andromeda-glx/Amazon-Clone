@@ -51,6 +51,16 @@ h2{
     grid-template-columns: 100px 1fr 200px;
     align-items: start;
     column-gap: 20px;
+    row-gap: 50px;
+}
+
+@media (max-width: 1000px){
+    .order-details-grid{
+        grid-template-columns: 100px 1fr;
+    }
+    .item-delivery-options{
+        width: 200px;
+    }
 }
 
 .item-details{
@@ -72,10 +82,38 @@ h2{
     color: rgb(177, 39, 4);
 }
 
-.item-update,
-.item-delete{
+.item-update-delete{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 6px;
+}
+
+.quantity-input{
+    width: 30px;
+}
+
+.quantity-input,
+.save-quantity-link{
+    display: none;
+}
+
+.is-editing-quantity .quantity-input,
+.is-editing-quantity .save-quantity-link{
+    display: initial;
+}
+
+.is-editing-quantity .item-update,
+.is-editing-quantity .item-quantity{
+    display: none;
+}
+
+.primary-link{
     color: rgb(21, 138, 184);
     cursor: pointer;
+}
+.primary-link:hover{
+    color: rgb(177, 39, 4);
 }
 
 .item-delivery-options{

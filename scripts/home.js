@@ -1,4 +1,4 @@
-import {cart, addProductToTheCart, saveCartToLocalStorage} from '../data/cart.js';
+import {cart, addProductToTheCart, getCartTotalQuantity} from '../data/cart.js';
 import {products} from '../data/products.js';
 import { convertCentsToDollars } from './utils/money.js';
 
@@ -78,7 +78,5 @@ function getProductQuantity(productId){
 }
 
 function updateCartQuantity() {
-    let totalQuantity = 0;
-    cart.forEach(item => totalQuantity += item.quantity);
-    document.querySelector('.js-cart-quantity').innerHTML = totalQuantity;
+    document.querySelector('.js-cart-quantity').innerHTML = getCartTotalQuantity();
 }
