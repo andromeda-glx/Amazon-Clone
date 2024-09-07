@@ -1,8 +1,10 @@
 import { cart, deleteCartItem, getCartTotalQuantity, updateProductQuantity } from '../data/cart.js';
 import { products } from '../data/products.js';
-import { convertCentsToDollars } from './utils/money.js';
+import convertCentsToDollars from './utils/money.js';
+import dayjs from 'https://unpkg.com/dayjs@1.11.13/esm/index.js';
 
 let productTypeIndex;
+let deliveryDate =
 updateThePage();
 
 function generateHTMLCode() {
@@ -28,26 +30,26 @@ function generateHTMLCode() {
                             </div>
                         </div>
 
-                        <div class="item-delivery-options">
+                        <div class="item-delivery-options js-item-delivery-options-${productTypeIndex}">
                             <p>Choose a delivery option:</p>
                             <div class="item-delivery-option">
-                                <input type="radio" name="option${productTypeIndex}" checked id="">
+                                <input type="radio" name="option${productTypeIndex}" checked>
                                 <div class="delivery-time-price">
-                                    <div class="delivery-time">Tuesday June, 21</div>
+                                    <div class="delivery-time">${calcDeliveryDate(7)}</div>
                                     <div class="delivery-price">FREE Shipping</div>
                                 </div>
                             </div>
                             <div class="item-delivery-option">
-                                <input type="radio" name="option${productTypeIndex}" id="">
+                                <input type="radio" name="option${productTypeIndex}">
                                 <div class="delivery-time-price">
-                                    <div class="delivery-time">Wednesday June, 15</div>
+                                    <div class="delivery-time">${calcDeliveryDate(3)}</div>
                                     <div class="delivery-price">$4.99 - Shipping</div>
                                 </div>
                             </div>
                             <div class="item-delivery-option">
-                                <input type="radio" name="option${productTypeIndex}" id="">
+                                <input type="radio" name="option${productTypeIndex}">
                                 <div class="delivery-time-price">
-                                    <div class="delivery-time">Monday June, 13</div>
+                                    <div class="delivery-time">${calcDeliveryDate(1)}</div>
                                     <div class="delivery-price">$9.99 - Shipping</div>
                                 </div>
                             </div>
@@ -130,4 +132,8 @@ function addInputEventListener(productIndex) {
             }
         });
     });
+}
+
+function calcDeliveryDate(numberOfDays){
+    return dayjs().add(numberOfDays, 'day').format('dddd, MMMM D');
 }
