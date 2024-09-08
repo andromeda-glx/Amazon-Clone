@@ -1,8 +1,9 @@
 import { cart, deleteCartItem, getCartTotalQuantity, updateProductQuantity, updateDeliveryOptionId} from '../../data/cart.js';
-import { products } from '../../data/products.js';
+import { products, findProduct } from '../../data/products.js';
 import convertCentsToDollars from '../utils/money.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.13/esm/index.js';
 import { deliveryOptions } from '../../data/delivery-options.js';
+import { renderPaymentSummary } from './payment-summary.js';
 
 let productTypeIndex;
 
@@ -88,15 +89,6 @@ function updateItemsNumber() {
     document.querySelector('.js-total-products-number').innerHTML = getCartTotalQuantity();
 }
 
-function findProduct(productId) {
-    for (let i = 0; i < products.length; i++) {
-        if (products[i].id === productId) {
-            return products[i];
-        }
-    }
-    return null;
-}
-
 function addDeleteEventListener() {
     document.querySelectorAll('.js-item-delete').forEach(deleteLink => {
         deleteLink.addEventListener('click', () => {
@@ -115,6 +107,8 @@ export function renderOrderSummary() {
     addDeleteEventListener();
     addUpdateEventListener();
     addRadioEventListener();
+    
+    renderPaymentSummary();
 }
 
 function addUpdateEventListener() {

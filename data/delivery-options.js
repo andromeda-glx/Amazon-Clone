@@ -16,3 +16,10 @@ export const deliveryOptions =
         deliveryPriceCents: 999
     }
 ];
+
+export function findDeliveryOption(deliveryOptionId){
+    for (const option of deliveryOptions) {
+        if (option.id === deliveryOptionId)
+            return option;
+    }
+}

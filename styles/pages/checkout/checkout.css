@@ -138,10 +138,6 @@ h2{
     cursor: pointer;
 }
 
-.delivery-time-price{
-    
-}
-
 .delivery-time{
     color: green;
     font-weight: 500;
@@ -153,7 +149,7 @@ h2{
     font-size: 15px;
 }
 
-.order-summary{
+.order-payment-summary{
     border: 1px solid #ddd;
     border-radius: 4px;
     padding: 18px;
@@ -164,7 +160,7 @@ h2{
 }
 
 @media (max-width: 1000px){
-    .order-summary{
+    .order-payment-summary{
         grid-row: 1;
     }
 }
