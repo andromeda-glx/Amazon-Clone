@@ -1,4 +1,4 @@
-import { cart, deleteCartItem, getCartTotalQuantity, updateProductQuantity } from '../data/cart.js';
+import { cart, deleteCartItem, getCartTotalQuantity, updateProductQuantity, updateDeliveryOptionId} from '../data/cart.js';
 import { products } from '../data/products.js';
 import convertCentsToDollars from './utils/money.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.13/esm/index.js';
@@ -74,8 +74,8 @@ function generateDeliveryOptions(productTypeIndex, deliveryOptId) {
 function addRadioEventListener(){
     document.querySelectorAll('.js-radio-btn').forEach(radio => {
         radio.addEventListener('change', () =>{
-            const productIndex = Number(radio.dataset.productIndex);
-            cart[productIndex].deliveryOptionId = radio.dataset.deliveryId;
+            const {productIndex, deliveryId} = radio.dataset;
+            updateDeliveryOptionId(Number(productIndex), deliveryId)
             updateThePage();
         })
     });

@@ -45,3 +45,8 @@ export function updateProductQuantity(productIndex, quantity){
         alert('Invalid quantity value.');
     }
 }
+
+export function updateDeliveryOptionId(productIndex, newId){
+    cart[productIndex].deliveryOptionId = newId;
+    saveCartToLocalStorage();
+}
