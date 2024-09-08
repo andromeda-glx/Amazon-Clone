@@ -2,9 +2,9 @@ import { cart, deleteCartItem, getCartTotalQuantity, updateProductQuantity } fro
 import { products } from '../data/products.js';
 import convertCentsToDollars from './utils/money.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.13/esm/index.js';
+import { deliveryOptions } from '../data/delivery-options.js';
 
 let productTypeIndex;
-let deliveryDate =
 updateThePage();
 
 function generateHTMLCode() {
@@ -13,9 +13,17 @@ function generateHTMLCode() {
 
     cart.forEach(cartItem => {
         const product = findProduct(cartItem.id);
+        const deliveryOptionId = cartItem.deliveryOptionId;
+        let deliveryDate = '';
+
+        deliveryOptions.forEach(opt => {
+            if (opt.id === deliveryOptionId)
+                deliveryDate = opt;
+        });
+
         orderItemsHTML.innerHTML += `
                 <div class="order-item">
-                    <h3>Delivery date: Tuesday June, 21</h3>
+                    <h3>Delivery Date: ${calcDeliveryDate(deliveryDate.deliveryDays)}</h3>
                     <div class="order-details-grid">
                         <img class="item-img" src="${product.image}" alt="">
                         <div class="item-details-${productTypeIndex}">
@@ -29,36 +37,52 @@ function generateHTMLCode() {
                                 <span class="item-delete primary-link js-item-delete" data-product-index="${productTypeIndex}">Delete</span>
                             </div>
                         </div>
-
-                        <div class="item-delivery-options js-item-delivery-options-${productTypeIndex}">
+                        <div class="item-delivery-options">
                             <p>Choose a delivery option:</p>
-                            <div class="item-delivery-option">
-                                <input type="radio" name="option${productTypeIndex}" checked>
-                                <div class="delivery-time-price">
-                                    <div class="delivery-time">${calcDeliveryDate(7)}</div>
-                                    <div class="delivery-price">FREE Shipping</div>
-                                </div>
-                            </div>
-                            <div class="item-delivery-option">
-                                <input type="radio" name="option${productTypeIndex}">
-                                <div class="delivery-time-price">
-                                    <div class="delivery-time">${calcDeliveryDate(3)}</div>
-                                    <div class="delivery-price">$4.99 - Shipping</div>
-                                </div>
-                            </div>
-                            <div class="item-delivery-option">
-                                <input type="radio" name="option${productTypeIndex}">
-                                <div class="delivery-time-price">
-                                    <div class="delivery-time">${calcDeliveryDate(1)}</div>
-                                    <div class="delivery-price">$9.99 - Shipping</div>
-                                </div>
-                            </div>
+                                ${generateDeliveryOptions(productTypeIndex, cartItem.deliveryOptionId)}
                         </div>
                     </div>
                 </div>
         `;
         productTypeIndex++;
     });
+}
+
+function generateDeliveryOptions(productTypeIndex, deliveryOptId) {
+    let deliveryOpritonsHTML = '';
+    let deliveryPrice = 0;
+    deliveryOptions.forEach(deliveryOption => {
+        deliveryPrice = deliveryOption.deliveryPriceCents === 0 ? 'FREE' : `$${convertCentsToDollars(deliveryOption.deliveryPriceCents)} -`;
+
+        deliveryOpritonsHTML += `
+            <div class="item-delivery-option">
+                <input class="js-radio-btn" type="radio" name="option${productTypeIndex}" ${deliveryOption.id === deliveryOptId ? 'checked' : ''} data-product-index="${productTypeIndex}" data-delivery-id="${deliveryOption.id}">
+                <div class="delivery-time-price">
+                    <div class="delivery-time">
+                        ${calcDeliveryDate(deliveryOption.deliveryDays)}
+                    </div>
+                    <div class="delivery-price">
+                        ${deliveryPrice} Shipping
+                    </div>
+                </div>
+            </div>`
+    });
+
+    return deliveryOpritonsHTML;
+}
+
+function addRadioEventListener(){
+    document.querySelectorAll('.js-radio-btn').forEach(radio => {
+        radio.addEventListener('change', () =>{
+            const productIndex = Number(radio.dataset.productIndex);
+            cart[productIndex].deliveryOptionId = radio.dataset.deliveryId;
+            updateThePage();
+        })
+    });
+}
+
+function calcDeliveryDate(numberOfDays) {
+    return dayjs().add(numberOfDays, 'day').format('dddd, MMMM D');
 }
 
 function updateItemsNumber() {
@@ -91,6 +115,7 @@ function updateThePage() {
     updateItemsNumber();
     addDeleteEventListener();
     addUpdateEventListener();
+    addRadioEventListener();
 }
 
 function addUpdateEventListener() {
@@ -123,8 +148,8 @@ function addSaveEventListener(productIndex) {
 
 function addInputEventListener(productIndex) {
     document.querySelectorAll('input').forEach(input => {
-        input.addEventListener('keypress', (event) =>{
-            if (event.key === "Enter"){
+        input.addEventListener('keypress', (event) => {
+            if (event.key === "Enter") {
                 const inputValue = input.value;
 
                 updateProductQuantity(Number(productIndex), Number(inputValue));
@@ -132,8 +157,4 @@ function addInputEventListener(productIndex) {
             }
         });
     });
-}
-
-function calcDeliveryDate(numberOfDays){
-    return dayjs().add(numberOfDays, 'day').format('dddd, MMMM D');
 }

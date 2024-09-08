@@ -13,7 +13,8 @@ export function addProductToTheCart(id, quantity) {
     if (!isFound) {
         cart.push({
             id,
-            quantity
+            quantity,
+            deliveryOptionId: '1'
         });
     }
     saveCartToLocalStorage();

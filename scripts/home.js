@@ -1,6 +1,6 @@
-import {cart, addProductToTheCart, getCartTotalQuantity} from '../data/cart.js';
+import { addProductToTheCart, getCartTotalQuantity} from '../data/cart.js';
 import {products} from '../data/products.js';
-import { convertCentsToDollars } from './utils/money.js';
+import convertCentsToDollars from './utils/money.js';
 
 generateDataStructureHTML();
 addToCartEventListener();

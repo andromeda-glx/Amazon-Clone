@@ -48,10 +48,11 @@ h2{
 
 .order-details-grid{
     display: grid;
-    grid-template-columns: 100px 1fr 200px;
+    grid-template-columns: 100px 1fr 240px;
     align-items: start;
     column-gap: 20px;
     row-gap: 50px;
+    width: 100%;
 }
 
 @media (max-width: 1000px){
@@ -59,7 +60,7 @@ h2{
         grid-template-columns: 100px 1fr;
     }
     .item-delivery-options{
-        width: 200px;
+        width: 400px;
     }
 }
 
@@ -137,9 +138,14 @@ h2{
     cursor: pointer;
 }
 
+.delivery-time-price{
+    
+}
+
 .delivery-time{
     color: green;
     font-weight: 500;
+    
 }
 
 .delivery-price{
