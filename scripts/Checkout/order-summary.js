@@ -1,9 +1,9 @@
 import { cart, deleteCartItem, getCartTotalQuantity, updateProductQuantity, updateDeliveryOptionId} from '../../data/cart.js';
-import { products, findProduct } from '../../data/products.js';
+import { findProduct } from '../../data/products.js';
 import convertCentsToDollars from '../utils/money.js';
-import dayjs from 'https://unpkg.com/dayjs@1.11.13/esm/index.js';
-import { deliveryOptions } from '../../data/delivery-options.js';
+import { deliveryOptions, calculateDeliveryDate } from '../../data/delivery-options.js';
 import { renderPaymentSummary } from './payment-summary.js';
+import { renderCheckoutHeader } from './checkout-header.js';
 
 let productTypeIndex;
 
@@ -23,7 +23,7 @@ function generateOrderSummaryHTML() {
 
         orderItemsHTML.innerHTML += `
                 <div class="order-item">
-                    <h3>Delivery Date: ${calcDeliveryDate(deliveryDate.deliveryDays)}</h3>
+                    <h3>Delivery Date: ${calculateDeliveryDate(deliveryDate.deliveryDays)}</h3>
                     <div class="order-details-grid">
                         <img class="item-img" src="${product.image}" alt="">
                         <div class="item-details-${productTypeIndex}">
@@ -59,7 +59,7 @@ function generateDeliveryOptions(productTypeIndex, deliveryOptId) {
                 <input class="js-radio-btn" type="radio" name="option${productTypeIndex}" ${deliveryOption.id === deliveryOptId ? 'checked' : ''} data-product-index="${productTypeIndex}" data-delivery-id="${deliveryOption.id}">
                 <div class="delivery-time-price">
                     <div class="delivery-time">
-                        ${calcDeliveryDate(deliveryOption.deliveryDays)}
+                        ${calculateDeliveryDate(deliveryOption.deliveryDays)}
                     </div>
                     <div class="delivery-price">
                         ${deliveryPrice} Shipping
@@ -81,14 +81,6 @@ function addRadioEventListener(){
     });
 }
 
-function calcDeliveryDate(numberOfDays) {
-    return dayjs().add(numberOfDays, 'day').format('dddd, MMMM D');
-}
-
-function updateItemsNumber() {
-    document.querySelector('.js-total-products-number').innerHTML = getCartTotalQuantity();
-}
-
 function addDeleteEventListener() {
     document.querySelectorAll('.js-item-delete').forEach(deleteLink => {
         deleteLink.addEventListener('click', () => {
@@ -103,12 +95,12 @@ function addDeleteEventListener() {
 export function renderOrderSummary() {
     productTypeIndex = 0;
     generateOrderSummaryHTML();
-    updateItemsNumber();
     addDeleteEventListener();
     addUpdateEventListener();
     addRadioEventListener();
     
     renderPaymentSummary();
+    renderCheckoutHeader();
 }
 
 function addUpdateEventListener() {
