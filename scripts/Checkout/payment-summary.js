@@ -1,6 +1,6 @@
-import { cart, getCartTotalQuantity } from "../../data/cart.js";
-import { findDeliveryOption } from "../../data/delivery-options.js";
-import { findProduct } from "../../data/products.js";
+import { cart, getCartTotalQuantity } from "../data/cart.js";
+import { findDeliveryOption } from "../data/delivery-options.js";
+import { findProduct } from "../data/products.js";
 import convertCentsToDollars from "../utils/money.js";
 
 export function renderPaymentSummary(){

@@ -1,4 +1,4 @@
-import convertCentsToDollars from "../scripts/utils/money.js";
+import convertCentsToDollars from "../../scripts/utils/money.js";
 
 /* describe function is a test suite */
 /* it function is a test case */

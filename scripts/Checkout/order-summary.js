@@ -1,7 +1,7 @@
-import { cart, deleteCartItem, getCartTotalQuantity, updateProductQuantity, updateDeliveryOptionId} from '../../data/cart.js';
-import { findProduct } from '../../data/products.js';
+import { cart, deleteCartItem, getCartTotalQuantity, updateProductQuantity, updateDeliveryOptionId} from '../data/cart.js';
+import { findProduct } from '../data/products.js';
 import convertCentsToDollars from '../utils/money.js';
-import { deliveryOptions, calculateDeliveryDate } from '../../data/delivery-options.js';
+import { deliveryOptions, calculateDeliveryDate } from '../data/delivery-options.js';
 import { renderPaymentSummary } from './payment-summary.js';
 import { renderCheckoutHeader } from './checkout-header.js';
 

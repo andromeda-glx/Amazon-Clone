@@ -1,4 +1,4 @@
-import { getCartTotalQuantity } from "../../data/cart.js";
+import { getCartTotalQuantity } from "../data/cart.js";
 
 export function renderCheckoutHeader() {
     generateCheckoutHeaderHTML();
