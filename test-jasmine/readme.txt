@@ -2,3 +2,5 @@ I copied this folder after i downloaded Jasmin standalone framework and extracte
 
 The URL for downloading the latest version of Jasmin standalone framework:
 https://github.com/jasmine/jasmine/releases
+
+In Jsamin testing framework, 'test' referes to as 'spec'.
