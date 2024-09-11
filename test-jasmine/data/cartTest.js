@@ -47,3 +47,5 @@ describe('test suite: addToCart', () => {
         expect(cart[0].deliveryOptionId).toEqual('1');
     });
 });
+
+/* Integration test: testing many units/pieces of code working together */

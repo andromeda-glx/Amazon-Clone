@@ -8,7 +8,7 @@ export function renderPaymentSummary(){
 }
 
 function generatePaymentSummaryHTML(){
-    let paymentSummaryHTML = document.querySelector('.order-payment-summary');
+    let paymentSummaryHTML = document.querySelector('.js-order-payment-summary');
 
     const totalItemsPriceCents = getCartTotalPrice();
     const totalShippingPriceCents = getCartTotalShippingPrice();

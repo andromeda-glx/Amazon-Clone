@@ -5,9 +5,10 @@ import { deliveryOptions, calculateDeliveryDate } from '../data/delivery-options
 import { renderPaymentSummary } from './payment-summary.js';
 import { renderCheckoutHeader } from './checkout-header.js';
 
-let productTypeIndex;
+let productTypeIndex = 0;
 
-function generateOrderSummaryHTML() {
+export function generateOrderSummaryHTML() {
+    
     const orderItemsHTML = document.querySelector('.js-order-items');
     orderItemsHTML.innerHTML = '';
 
@@ -29,12 +30,12 @@ function generateOrderSummaryHTML() {
                         <div class="item-details-${productTypeIndex}">
                             <div class="item-name">${product.name}</div>
                             <div class="item-price">$${convertCentsToDollars(product.priceCents)}</div>
-                            <div class="item-quantity">Quantity: ${cartItem.quantity}</div>
+                            <div class="item-quantity js-item-quantity-${product.id}">Quantity: ${cartItem.quantity}</div>
                             <div class="item-update-delete">
                                 <span class="item-update primary-link" data-product-index="${productTypeIndex}">Update</span>
                                 <input class="quantity-input js-quantity-input-${productTypeIndex}" type="text">
                                 <span class="save-quantity-link primary-link" data-product-index="${productTypeIndex}">Save</span>
-                                <span class="item-delete primary-link js-item-delete" data-product-index="${productTypeIndex}">Delete</span>
+                                <span class="item-delete primary-link js-item-delete js-item-delete-${productTypeIndex}" data-product-index="${productTypeIndex}">Delete</span>
                             </div>
                         </div>
                         <div class="item-delivery-options">
@@ -46,6 +47,8 @@ function generateOrderSummaryHTML() {
         `;
         productTypeIndex++;
     });
+
+    
 }
 
 function generateDeliveryOptions(productTypeIndex, deliveryOptId) {

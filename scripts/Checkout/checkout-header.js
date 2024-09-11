@@ -5,7 +5,7 @@ export function renderCheckoutHeader() {
 }
 
 function generateCheckoutHeaderHTML() {
-    const headerHTML = document.querySelector('.checkout-header');
+    const headerHTML = document.querySelector('.js-checkout-header');
     
     headerHTML.innerHTML = 
     `            
