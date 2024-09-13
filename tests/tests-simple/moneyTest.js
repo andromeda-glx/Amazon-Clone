@@ -3,7 +3,7 @@
     This way of testing our code is much more efficient and more foolproof than Manual Testing, which involves us interacting with our interface to test different scenarioes.
 */
 
-import convertCentsToDollars from "../scripts/utils/money.js";
+import convertCentsToDollars from "../../scripts/utils/money.js";
 
 function convertCentsToDollarsTest(priceCents, expectation) {
     let result = convertCentsToDollars(priceCents);
