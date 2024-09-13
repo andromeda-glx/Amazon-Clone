@@ -5,8 +5,6 @@ import { deliveryOptions, calculateDeliveryDate } from '../data/delivery-options
 import { renderPaymentSummary } from './payment-summary.js';
 import { renderCheckoutHeader } from './checkout-header.js';
 
-let productTypeIndex = 0;
-
 export function generateOrderSummaryHTML() {
     
     const orderItemsHTML = document.querySelector('.js-order-items');
@@ -23,35 +21,34 @@ export function generateOrderSummaryHTML() {
         });
 
         orderItemsHTML.innerHTML += `
-                <div class="order-item">
+                <div class="order-item js-order-item-${product.id}">
                     <h3>Delivery Date: ${calculateDeliveryDate(deliveryDate.deliveryDays)}</h3>
                     <div class="order-details-grid">
                         <img class="item-img" src="${product.image}" alt="">
-                        <div class="item-details-${productTypeIndex}">
+                        <div class="item-details-${product.id}">
                             <div class="item-name">${product.name}</div>
                             <div class="item-price">$${convertCentsToDollars(product.priceCents)}</div>
                             <div class="item-quantity js-item-quantity-${product.id}">Quantity: ${cartItem.quantity}</div>
                             <div class="item-update-delete">
-                                <span class="item-update primary-link" data-product-index="${productTypeIndex}">Update</span>
-                                <input class="quantity-input js-quantity-input-${productTypeIndex}" type="text">
-                                <span class="save-quantity-link primary-link" data-product-index="${productTypeIndex}">Save</span>
-                                <span class="item-delete primary-link js-item-delete js-item-delete-${productTypeIndex}" data-product-index="${productTypeIndex}">Delete</span>
+                                <span class="item-update primary-link" data-product-id="${product.id}">Update</span>
+                                <input class="quantity-input js-quantity-input-${product.id}" type="text">
+                                <span class="save-quantity-link primary-link" data-product-id="${product.id}">Save</span>
+                                <span class="item-delete primary-link js-item-delete js-item-delete-${product.id}" data-product-id="${product.id}">Delete</span>
                             </div>
                         </div>
                         <div class="item-delivery-options">
                             <p>Choose a delivery option:</p>
-                                ${generateDeliveryOptions(productTypeIndex, cartItem.deliveryOptionId)}
+                                ${generateDeliveryOptions(product.id, cartItem.deliveryOptionId)}
                         </div>
                     </div>
                 </div>
         `;
-        productTypeIndex++;
     });
 
     
 }
 
-function generateDeliveryOptions(productTypeIndex, deliveryOptId) {
+function generateDeliveryOptions(productId, deliveryOptId) {
     let deliveryOpritonsHTML = '';
     let deliveryPrice = 0;
     deliveryOptions.forEach(deliveryOption => {
@@ -59,7 +56,7 @@ function generateDeliveryOptions(productTypeIndex, deliveryOptId) {
 
         deliveryOpritonsHTML += `
             <div class="item-delivery-option">
-                <input class="js-radio-btn" type="radio" name="option${productTypeIndex}" ${deliveryOption.id === deliveryOptId ? 'checked' : ''} data-product-index="${productTypeIndex}" data-delivery-id="${deliveryOption.id}">
+                <input class="js-radio-btn" type="radio" name="option${productId}" ${deliveryOption.id === deliveryOptId ? 'checked' : ''} data-product-id="${productId}" data-delivery-id="${deliveryOption.id}">
                 <div class="delivery-time-price">
                     <div class="delivery-time">
                         ${calculateDeliveryDate(deliveryOption.deliveryDays)}
@@ -77,8 +74,8 @@ function generateDeliveryOptions(productTypeIndex, deliveryOptId) {
 function addRadioEventListener(){
     document.querySelectorAll('.js-radio-btn').forEach(radio => {
         radio.addEventListener('change', () =>{
-            const {productIndex, deliveryId} = radio.dataset;
-            updateDeliveryOptionId(Number(productIndex), deliveryId)
+            const {productId, deliveryId} = radio.dataset;
+            updateDeliveryOptionId(productId, deliveryId)
             renderOrderSummary();
         })
     });
@@ -87,16 +84,15 @@ function addRadioEventListener(){
 function addDeleteEventListener() {
     document.querySelectorAll('.js-item-delete').forEach(deleteLink => {
         deleteLink.addEventListener('click', () => {
-            const productIndex = deleteLink.dataset.productIndex;
+            const productId = deleteLink.dataset.productId;
 
-            deleteCartItem(Number(productIndex));
+            deleteCartItem(productId);
             renderOrderSummary();
         });
     });
 }
 
 export function renderOrderSummary() {
-    productTypeIndex = 0;
     generateOrderSummaryHTML();
     addDeleteEventListener();
     addUpdateEventListener();
@@ -111,36 +107,36 @@ function addUpdateEventListener() {
 
     updateProductHTML.forEach(updateText => {
         updateText.addEventListener('click', () => {
-            const productIndex = updateText.dataset.productIndex;
-            const itemContainer = document.querySelector(`.item-details-${productIndex}`);
+            const productId = updateText.dataset.productId;
+            const itemContainer = document.querySelector(`.item-details-${productId}`);
             itemContainer.classList.add('is-editing-quantity');
 
-            addSaveEventListener(productIndex);
-            addInputEventListener(productIndex);
+            addSaveEventListener(productId);
+            addInputEventListener(productId);
         });
     });
 }
 
-function addSaveEventListener(productIndex) {
+function addSaveEventListener(productId) {
     document.querySelectorAll('.save-quantity-link').forEach(saveLink => {
-        if (productIndex === saveLink.dataset.productIndex) {
+        if (productId === saveLink.dataset.productId) {
             saveLink.addEventListener('click', () => {
-                const inputValue = document.querySelector(`.js-quantity-input-${productIndex}`).value;
+                const inputValue = document.querySelector(`.js-quantity-input-${productId}`).value;
 
-                updateProductQuantity(Number(productIndex), Number(inputValue));
+                updateProductQuantity(productId, Number(inputValue));
                 renderOrderSummary();
             });
         }
     });
 }
 
-function addInputEventListener(productIndex) {
+function addInputEventListener(productId) {
     document.querySelectorAll('input').forEach(input => {
         input.addEventListener('keypress', (event) => {
             if (event.key === "Enter") {
                 const inputValue = input.value;
 
-                updateProductQuantity(Number(productIndex), Number(inputValue));
+                updateProductQuantity(productId, Number(inputValue));
                 renderOrderSummary();
             }
         });
