@@ -3,6 +3,7 @@ export function findProduct(productId) {
         if (productId === product.id)
             return product;
     }
+    return null;
 }
 
 export const products = [

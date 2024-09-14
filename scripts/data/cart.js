@@ -1,3 +1,5 @@
+import { deliveryOptions } from "./delivery-options.js";
+
 export let cart;
 
 loadFromStorage();
@@ -53,18 +55,17 @@ export function updateProductQuantity(productId, quantity) {
                 cart[index].quantity = quantity;
                 saveCartToLocalStorage();
             }
-            else {
-                alert('Invalid quantity value.');
-            }
         }
     });
 }
 
 export function updateDeliveryOptionId(productId, newId) {
     cart.forEach((item, index) => {
-        if (item.id === productId)
-            cart[index].deliveryOptionId = newId;        
+        if (item.id === productId){
+            if (Number(newId) > 0 && Number(newId) <= deliveryOptions.length){
+                cart[index].deliveryOptionId = newId;     
+                saveCartToLocalStorage();
+            }
+        }
     });
-
-    saveCartToLocalStorage();
 }

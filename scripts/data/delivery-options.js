@@ -8,12 +8,12 @@ export const deliveryOptions =
         deliveryPriceCents: 0
     },
     {
-        id: '3',
+        id: '2',
         deliveryDays: 5,
         deliveryPriceCents: 259
     },
     {
-        id: '2',
+        id: '3',
         deliveryDays: 3,
         deliveryPriceCents: 499
     },

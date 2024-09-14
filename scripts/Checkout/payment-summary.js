@@ -28,7 +28,7 @@ function generatePaymentSummaryHTML(){
         </div>
         <div class="order-summary-row">
             <div>Shipping & handling:</div>
-            <div class="price-row">$${convertCentsToDollars(totalShippingPriceCents)}</div>
+            <div class="price-row js-total-shipping-price">$${convertCentsToDollars(totalShippingPriceCents)}</div>
         </div>
         <div class="order-summary-row total-before-tax">
             <div>Total before tax:</div>
@@ -40,7 +40,7 @@ function generatePaymentSummaryHTML(){
         </div>
         <div class="order-summary-row order-total">
             <div>Order total:</div>
-            <div class="price-row">$${convertCentsToDollars(totalPriceWithTaxCents)}</div>
+            <div class="price-row js-total-price-with-tax">$${convertCentsToDollars(totalPriceWithTaxCents)}</div>
         </div>
 
         <button class="place-your-order-btn">

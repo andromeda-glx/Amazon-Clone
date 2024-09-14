@@ -26,8 +26,8 @@ export function generateOrderSummaryHTML() {
                     <div class="order-details-grid">
                         <img class="item-img" src="${product.image}" alt="">
                         <div class="item-details-${product.id}">
-                            <div class="item-name">${product.name}</div>
-                            <div class="item-price">$${convertCentsToDollars(product.priceCents)}</div>
+                            <div class="item-name js-item-name-${product.id}">${product.name}</div>
+                            <div class="item-price js-item-price-${product.id}">$${convertCentsToDollars(product.priceCents)}</div>
                             <div class="item-quantity js-item-quantity-${product.id}">Quantity: ${cartItem.quantity}</div>
                             <div class="item-update-delete">
                                 <span class="item-update primary-link" data-product-id="${product.id}">Update</span>
@@ -56,7 +56,7 @@ function generateDeliveryOptions(productId, deliveryOptId) {
 
         deliveryOpritonsHTML += `
             <div class="item-delivery-option">
-                <input class="js-radio-btn" type="radio" name="option${productId}" ${deliveryOption.id === deliveryOptId ? 'checked' : ''} data-product-id="${productId}" data-delivery-id="${deliveryOption.id}">
+                <input class="js-radio-btn js-delivery-option-${productId}-${deliveryOption.id}" type="radio" name="option${productId}" ${deliveryOption.id === deliveryOptId ? 'checked' : ''} data-product-id="${productId}" data-delivery-id="${deliveryOption.id}">
                 <div class="delivery-time-price">
                     <div class="delivery-time">
                         ${calculateDeliveryDate(deliveryOption.deliveryDays)}

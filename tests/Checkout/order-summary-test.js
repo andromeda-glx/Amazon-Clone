@@ -6,8 +6,8 @@ import { loadFromStorage, cart } from "../../scripts/data/cart.js";
 describe('test suite: generateOrderSummaryHTML', () => {
     /* Hooks let us ren some code fore each test */
     /* beforeEach Hook, will run its parameter function before each test */
-    let productId1;
-    let productId2;
+    const productId1 = 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6';
+    const productId2 = '15b6fc6f-327a-4ec4-896f-486349e85a3d';
 
     beforeEach(() => {
         document.querySelector('.js-test-container').innerHTML =
@@ -17,20 +17,18 @@ describe('test suite: generateOrderSummaryHTML', () => {
             <div class="js-order-payment-summary"></div>
         `;
 
-        productId1 = 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6';
-        productId2 = '15b6fc6f-327a-4ec4-896f-486349e85a3d';
         spyOn(localStorage, 'setItem');
         spyOn(localStorage, 'getItem').and.callFake(() => {
             return JSON.stringify([
                 {
                     id: productId1,
-                    quantity: 1,
+                    quantity: 2,
                     deliveryOptionId: '1'
                 },
                 {
                     id: productId2,
-                    quantity: 2,
-                    deliveryOptionId: '2'
+                    quantity: 1,
+                    deliveryOptionId: '3'
                 }
             ]);
         });
@@ -44,6 +42,8 @@ describe('test suite: generateOrderSummaryHTML', () => {
         document.querySelector('.js-test-container').innerHTML = ``;
     });
 
+
+
     it('displays orders', () => {
 
         expect(
@@ -52,11 +52,18 @@ describe('test suite: generateOrderSummaryHTML', () => {
 
         expect(
             document.querySelector(`.js-item-quantity-${productId1}`).innerHTML
-        ).toEqual('Quantity: 1');
+        ).toEqual('Quantity: 2');
 
         expect(
             document.querySelector(`.js-item-quantity-${productId2}`).innerText
-        ).toEqual('Quantity: 2');
+        ).toEqual('Quantity: 1');
+
+        expect(document.querySelector(`.js-item-name-${productId1}`).innerText).toEqual('Black and Gray Athletic Cotton Socks - 6 Pairs');
+        
+        expect(document.querySelector(`.js-item-name-${productId2}`).innerText).toEqual('Intermediate Size Basketball');
+        
+        expect(document.querySelector(`.js-item-price-${productId2}`).innerText).toEqual('$20.95');
+        expect(document.querySelector(`.js-item-price-${productId1}`).innerText).toEqual('$10.90');
     });
 
     it('removes an item', () => {
@@ -87,6 +94,27 @@ describe('test suite: generateOrderSummaryHTML', () => {
         expect(
             cart[0].id
         ).toEqual(productId2);
+
+        expect(document.querySelector(`.js-item-name-${productId2}`).innerText).toEqual('Intermediate Size Basketball');
+
+        expect(document.querySelector(`.js-item-price-${productId2}`).innerText).toEqual('$20.95');
+    });
+
+    it('updates delivery option', () => {
+        const deliveryBtn = document.querySelector(`.js-delivery-option-${productId1}-4`);
+
+        deliveryBtn.click();
+
+        expect(deliveryBtn.checked).toEqual(true);
+        expect(cart.length).toEqual(2);
+
+        expect(cart[0].id).toEqual(productId1);
+        expect(cart[0].deliveryOptionId).toEqual('4');
+        expect(cart[1].id).toEqual(productId2);
+        expect(cart[1].deliveryOptionId).toEqual('3');
+
+        expect(document.querySelector('.js-total-shipping-price').innerText).toEqual('$14.98');
+        expect(document.querySelector('.js-total-price-with-tax').innerText).toEqual('$63.50');
     });
 });
 
