@@ -1,4 +1,4 @@
-import { cart, deleteCartItem, getCartTotalQuantity, updateProductQuantity, updateDeliveryOptionId} from '../data/cart.js';
+import { cart } from '../data/cart.js';
 import { findProduct } from '../data/products.js';
 import convertCentsToDollars from '../utils/money.js';
 import { deliveryOptions, calculateDeliveryDate } from '../data/delivery-options.js';
@@ -10,7 +10,7 @@ export function generateOrderSummaryHTML() {
     const orderItemsHTML = document.querySelector('.js-order-items');
     orderItemsHTML.innerHTML = '';
 
-    cart.forEach(cartItem => {
+    cart.cartItems.forEach(cartItem => {
         const product = findProduct(cartItem.id);
         const deliveryOptionId = cartItem.deliveryOptionId;
         let deliveryDate = '';
@@ -75,7 +75,7 @@ function addRadioEventListener(){
     document.querySelectorAll('.js-radio-btn').forEach(radio => {
         radio.addEventListener('change', () =>{
             const {productId, deliveryId} = radio.dataset;
-            updateDeliveryOptionId(productId, deliveryId)
+            cart.updateDeliveryOptionId(productId, deliveryId)
             renderOrderSummary();
         })
     });
@@ -86,7 +86,7 @@ function addDeleteEventListener() {
         deleteLink.addEventListener('click', () => {
             const productId = deleteLink.dataset.productId;
 
-            deleteCartItem(productId);
+            cart.deleteCartItem(productId);
             renderOrderSummary();
         });
     });
@@ -123,7 +123,7 @@ function addSaveEventListener(productId) {
             saveLink.addEventListener('click', () => {
                 const inputValue = document.querySelector(`.js-quantity-input-${productId}`).value;
 
-                updateProductQuantity(productId, Number(inputValue));
+                cart.updateProductQuantity(productId, Number(inputValue));
                 renderOrderSummary();
             });
         }
@@ -136,7 +136,7 @@ function addInputEventListener(productId) {
             if (event.key === "Enter") {
                 const inputValue = input.value;
 
-                updateProductQuantity(productId, Number(inputValue));
+                cart.updateProductQuantity(productId, Number(inputValue));
                 renderOrderSummary();
             }
         });

@@ -1,4 +1,4 @@
-import { cart, getCartTotalQuantity } from "../data/cart.js";
+import { cart } from "../data/cart.js";
 import { findDeliveryOption } from "../data/delivery-options.js";
 import { findProduct } from "../data/products.js";
 import convertCentsToDollars from "../utils/money.js";
@@ -23,7 +23,7 @@ function generatePaymentSummaryHTML(){
     `
         <h3 class="order-summary-title">Order Summary</h3>
         <div class="order-summary-row">
-            <div>Items (${getCartTotalQuantity()}):</div>
+            <div>Items (${cart.getCartTotalQuantity()}):</div>
             <div class="price-row">$${convertCentsToDollars(totalItemsPriceCents)}</div>
         </div>
         <div class="order-summary-row">
@@ -51,7 +51,7 @@ function generatePaymentSummaryHTML(){
 
 function getCartTotalPrice(){
     let total = 0;
-    cart.forEach(cartItem => {
+    cart.cartItems.forEach(cartItem => {
         let itemQuantity = cartItem.quantity;
         let itemPrice = findProduct(cartItem.id).priceCents;
 
@@ -63,7 +63,7 @@ function getCartTotalPrice(){
 
 function getCartTotalShippingPrice() {
     let total = 0;
-    cart.forEach(cartItem => {
+    cart.cartItems.forEach(cartItem => {
         let {deliveryOptionId} = cartItem;
         let deliveryOption = findDeliveryOption(deliveryOptionId);
 

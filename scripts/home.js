@@ -1,4 +1,4 @@
-import { addProductToTheCart, getCartTotalQuantity} from './data/cart.js';
+import { cart } from './data/cart.js';
 import {products} from './data/products.js';
 import convertCentsToDollars from './utils/money.js';
 
@@ -66,7 +66,7 @@ function addToCartEventListener() {
                     addedMessage.classList.remove('added-to-cart-visible');
                 }, 2000);
 
-                addProductToTheCart(productId, getProductQuantity(productId));
+                cart.addProductToTheCart(productId, getProductQuantity(productId));
 
                 updateCartQuantity();
             });
@@ -78,5 +78,5 @@ function getProductQuantity(productId){
 }
 
 function updateCartQuantity() {
-    document.querySelector('.js-cart-quantity').innerHTML = getCartTotalQuantity();
+    document.querySelector('.js-cart-quantity').innerHTML = cart.getCartTotalQuantity();
 }
