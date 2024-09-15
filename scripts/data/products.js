@@ -1,6 +1,6 @@
 import convertCentsToDollars from "../utils/money.js";
 
-export class Product{
+class Product{
     id;
     image;
     name;
@@ -25,6 +25,26 @@ export class Product{
 
     getPrice(){
         return convertCentsToDollars(this.priceCents);
+    }
+
+    getExtraHTMLInfo(){
+        return '';
+    }
+}
+
+export class Clothing extends Product{
+    sizeChartLink;
+
+    constructor(productDetails){
+        super(productDetails);
+        this.sizeChartLink = productDetails.sizeChartLink;
+    }
+
+    getExtraHTMLInfo(){
+        // super.getExtraHTMLInfo();
+        return `
+            <a href="../${this.sizeChartLink}" target="_blank">Size chart</a>
+        `;
     }
 }
 
@@ -716,5 +736,10 @@ export const products = [
         priceCents: 815
     }
 ].map(item => {
-    return new Product(item);
+    if (item.type === 'clothing'){
+        return new Clothing(item);
+    }
+    else{
+        return new Product(item);
+    }
 });

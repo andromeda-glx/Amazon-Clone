@@ -1,5 +1,5 @@
 import { cart } from './data/cart.js';
-import { products } from './data/products.js';
+import { products, Clothing } from './data/products.js';
 import convertCentsToDollars from './utils/money.js';
 
 generateDataStructureHTML();
@@ -39,11 +39,14 @@ function generateDataStructureHTML() {
                         <option value="10">10</option>
                     </select>
                 </div>
+                ${product.getExtraHTMLInfo()}
                 <div class="added-to-cart js-added-to-cart-${product.id}">
                     <img src="images/icons/checkmark.png">
                     <div>Added</div>
                 </div>
-                <button class="add-to-cart-btn js-add-to-cart-btn" data-product-id="${product.id}">Add to Cart</button>
+                <div class="add-to-cart-btn-container">
+                    <button class="add-to-cart-btn js-add-to-cart-btn" data-product-id="${product.id}">Add to Cart</button>
+                </div>
             </div>
         `;
     });
