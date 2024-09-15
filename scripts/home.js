@@ -1,5 +1,5 @@
 import { cart } from './data/cart.js';
-import {products} from './data/products.js';
+import { products } from './data/products.js';
 import convertCentsToDollars from './utils/money.js';
 
 generateDataStructureHTML();
@@ -21,10 +21,10 @@ function generateDataStructureHTML() {
                     ${product.name}
                 </div>
                 <div class="product-rating-c">
-                    <img class="product-rating-star" src="./images/ratings/rating-${product.rating.stars * 10}.png" alt="">
-                    <div class="product-rating-num">${product.rating.count}</div>
+                    <img class="product-rating-star" src="${product.getStarsURL()}" alt="">
+                    <div class="product-rating-num">${product.getRatingCount()}</div>
                 </div>
-                <div class="product-price">$${convertCentsToDollars(product.priceCents)}</div>
+                <div class="product-price">$${product.getPrice()}</div>
                 <div class="product-quantity">
                 <select class="js-quantity-selector-${product.id}">
                         <option selected value="1">1</option>

@@ -1,3 +1,33 @@
+import convertCentsToDollars from "../utils/money.js";
+
+export class Product{
+    id;
+    image;
+    name;
+    rating;
+    priceCents;
+
+    constructor(productDetails){
+        this.id = productDetails.id;
+        this.image = productDetails.image;
+        this.name = productDetails.name;
+        this.rating = productDetails.rating;
+        this.priceCents = productDetails.priceCents;
+    }
+
+    getStarsURL(){
+        return `./images/ratings/rating-${this.rating.stars * 10}.png`;
+    }
+
+    getRatingCount(){
+        return this.rating.count;
+    }
+
+    getPrice(){
+        return convertCentsToDollars(this.priceCents);
+    }
+}
+
 export function findProduct(productId) {
     for (const product of products) {
         if (productId === product.id)
@@ -685,4 +715,6 @@ export const products = [
         },
         priceCents: 815
     }
-];
+].map(item => {
+    return new Product(item);
+});

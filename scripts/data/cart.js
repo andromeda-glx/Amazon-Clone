@@ -1,15 +1,15 @@
 import { deliveryOptions } from "./delivery-options.js";
 
-class Cart {
+export class Cart {
     cartItems;
     #localStorageKey;
 
     constructor(localStorageKey){
         this.#localStorageKey = localStorageKey;
-        this.#loadFromStorage();
+        this.loadFromStorage();
     }
 
-    #loadFromStorage() {
+    loadFromStorage() {
         this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey)) || [];
     }
 
@@ -39,7 +39,7 @@ class Cart {
     }
 
     deleteCartItem(itemId) {
-        this.cartItemscart.forEach((product, index) => {
+        this.cartItems.forEach((product, index) => {
             if (product.id === itemId)
                 this.cartItems.splice(index, 1);
         });
@@ -77,7 +77,7 @@ class Cart {
     }
 }
 
-export const cart = new Cart('cart-oop');
+export const cart = new Cart('cart');
 
 /* results in a boolean value */
 // console.log(businessCart instanceof Cart);

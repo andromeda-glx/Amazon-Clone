@@ -1,7 +1,7 @@
 /* Integration test: testing many units/pieces of code working together */
 
 import { renderOrderSummary } from "../../scripts/Checkout/order-summary.js";
-import { loadFromStorage, cart } from "../../scripts/data/cart.js";
+import { cart } from "../../scripts/data/cart.js";
 
 describe('test suite: generateOrderSummaryHTML', () => {
     /* Hooks let us ren some code fore each test */
@@ -32,7 +32,7 @@ describe('test suite: generateOrderSummaryHTML', () => {
                 }
             ]);
         });
-        loadFromStorage();
+        cart.loadFromStorage();
 
         renderOrderSummary();
     });
@@ -88,11 +88,11 @@ describe('test suite: generateOrderSummaryHTML', () => {
         ).not.toEqual(null);
 
         expect(
-            cart.length
+            cart.cartItems.length
         ).toEqual(1);
 
         expect(
-            cart[0].id
+            cart.cartItems[0].id
         ).toEqual(productId2);
 
         expect(document.querySelector(`.js-item-name-${productId2}`).innerText).toEqual('Intermediate Size Basketball');
@@ -106,12 +106,12 @@ describe('test suite: generateOrderSummaryHTML', () => {
         deliveryBtn.click();
 
         expect(deliveryBtn.checked).toEqual(true);
-        expect(cart.length).toEqual(2);
+        expect(cart.cartItems.length).toEqual(2);
 
-        expect(cart[0].id).toEqual(productId1);
-        expect(cart[0].deliveryOptionId).toEqual('4');
-        expect(cart[1].id).toEqual(productId2);
-        expect(cart[1].deliveryOptionId).toEqual('3');
+        expect(cart.cartItems[0].id).toEqual(productId1);
+        expect(cart.cartItems[0].deliveryOptionId).toEqual('4');
+        expect(cart.cartItems[1].id).toEqual(productId2);
+        expect(cart.cartItems[1].deliveryOptionId).toEqual('3');
 
         expect(document.querySelector('.js-total-shipping-price').innerText).toEqual('$14.98');
         expect(document.querySelector('.js-total-price-with-tax').innerText).toEqual('$63.50');
