@@ -17,7 +17,7 @@ function generateDataStructureHTML() {
                 <div class="product-img-c">
                     <img class="product-img" src="${product.image}" alt="">
                 </div>
-                <div class="product-title">
+                <div class="product-title limit-line">
                     ${product.name}
                 </div>
                 <div class="product-rating-c">

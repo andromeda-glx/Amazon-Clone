@@ -743,3 +743,10 @@ export const products = [
         return new Product(item);
     }
 });
+
+// function logThis(){
+//     console.log(this);
+// }
+
+// logThis(); /* returns undefined */
+// logThis.call('Hello'); /* returns 'Hello' */
