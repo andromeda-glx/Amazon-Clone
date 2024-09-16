@@ -1,5 +1,5 @@
 import { cart } from './data/cart.js';
-import { products, Clothing } from './data/products.js';
+import { products } from './data/products.js';
 import convertCentsToDollars from './utils/money.js';
 
 generateDataStructureHTML();
