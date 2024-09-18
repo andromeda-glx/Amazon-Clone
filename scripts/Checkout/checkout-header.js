@@ -17,7 +17,7 @@ function generateCheckoutHeaderHTML() {
         </div>
         <div class="middle-section">
             Checkout (<a class="items-quantity-link" href="./home.html">
-            <span class="js-total-products-number">${cart.getCartTotalQuantity()}</span> items</a>)
+            <span class="js-total-products-number">${cart.getCartTotalQuantity()}</span> items</a> )
         </div>
         <div class="right-section">
             <img src="./images/icons/checkout-lock-icon.png" alt="">

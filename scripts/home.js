@@ -1,10 +1,13 @@
 import { cart } from './data/cart.js';
-import { products } from './data/products.js';
-import convertCentsToDollars from './utils/money.js';
+import { products, loadProducts } from './data/products.js';
 
-generateDataStructureHTML();
-addToCartEventListener();
-updateCartQuantity();
+loadProducts(renderProductsGrid);
+
+function renderProductsGrid() {
+    generateDataStructureHTML();
+    addToCartEventListener();
+    updateCartQuantity();
+}
 
 function generateDataStructureHTML() {
     const productsContainer = document.querySelector('.js-products-grid');
@@ -76,7 +79,7 @@ function addToCartEventListener() {
         });
 }
 
-function getProductQuantity(productId){
+function getProductQuantity(productId) {
     return Number(document.querySelector(`.js-quantity-selector-${productId}`).value);
 }
 
