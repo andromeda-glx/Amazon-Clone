@@ -2,12 +2,21 @@
 
 import { renderOrderSummary } from "../../scripts/Checkout/order-summary.js";
 import { cart } from "../../scripts/data/cart.js";
+import { loadProducts } from "../../scripts/data/products.js";
 
 describe('test suite: generateOrderSummaryHTML', () => {
-    /* Hooks let us ren some code fore each test */
+    /* Hooks let us run some code fore each test */
     /* beforeEach Hook, will run its parameter function before each test */
     const productId1 = 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6';
     const productId2 = '15b6fc6f-327a-4ec4-896f-486349e85a3d';
+
+    /* beforeAll Hook, will reun its parameter function before all the test (1 time)*/
+    /* done() is a Jasmine function which will stop the code compilation process until its called */
+    beforeAll((done) => {
+        loadProducts(() => {
+            done();
+        });
+    });
 
     beforeEach(() => {
         document.querySelector('.js-test-container').innerHTML =
