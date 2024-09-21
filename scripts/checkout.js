@@ -5,8 +5,19 @@ import { renderCheckoutHeader } from "./Checkout/checkout-header.js";
 // import "./backend-practice.js";
 import { loadProducts } from "./data/products.js";
 
-loadProducts(() => {
+/* resolve() lets us control when to go to the next step. (then())*/
+new Promise((resolve) => {
+    loadProducts(() => {
+        resolve();
+    });
+}).then(() => {
     renderCheckoutHeader();
     renderOrderSummary();
     renderPaymentSummary();
 });
+
+// loadProducts(() => {
+//     renderCheckoutHeader();
+//     renderOrderSummary();
+//     renderPaymentSummary();
+// });
