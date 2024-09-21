@@ -10,13 +10,13 @@ function generateCheckoutHeaderHTML() {
     headerHTML.innerHTML = 
     `            
         <div class="left-section">
-            <a href="./home.html">
+            <a href="./index.html">
                 <img class="amazon-logo" src="./images/amazon-logo.png" alt="">
                 <img class="amazon-logo-sm" src="./images/amazon-mobile-logo.png" alt="">
             </a>
         </div>
         <div class="middle-section">
-            Checkout (<a class="items-quantity-link" href="./home.html">
+            Checkout (<a class="items-quantity-link" href="./index.html">
             <span class="js-total-products-number">${cart.getCartTotalQuantity()}</span> items</a> )
         </div>
         <div class="right-section">
