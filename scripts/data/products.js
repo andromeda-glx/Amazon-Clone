@@ -103,6 +103,31 @@ export function loadProducts(fun) {
     xhr.send();
 }
 
+/* insted of callbacks, fetch uses promise to deal with async code. */
+/* fetch doesn't need a 'GET' parameter, since GET is the main functionallity of it. */
+export function loadProductsFetch(){
+    const promise = fetch('https://supersimplebackend.dev/products').then(response => {
+        /* because response.json() is an async code, we need to return it as a promise */
+        return response.json();
+        /* the returned response.json() will be saved in the next step's parameter, productData */
+    }).then (productData => {
+        products = productData.map(item => {
+            switch(item.type){
+                case 'clothing':
+                    return new Clothing(item);
+                case 'appliance':
+                    return new Appliance(item);
+                default:
+                    return new Product(item);
+            }
+        })
+    });
+
+    return promise;
+    /* we can return a promise out of a function and then keep attaching more steps to it like below. */
+}
+/* loadProductsFech().then(() => {}); */
+
 // export const products = [
 //     {
 //         id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
