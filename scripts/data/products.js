@@ -99,6 +99,11 @@ export function loadProducts(fun) {
         
     });
 
+    xhr.addEventListener('error', (error) => {
+        console.log('There was a problem loading the page. Please refresh or try again later.');
+        
+    });
+
     xhr.open('GET', 'https://supersimplebackend.dev/products');
     xhr.send();
 }
@@ -121,6 +126,8 @@ export function loadProductsFetch(){
                     return new Product(item);
             }
         })
+    }).catch((error) => {
+        throw error;
     });
 
     return promise;

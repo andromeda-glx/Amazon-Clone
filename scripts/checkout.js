@@ -8,20 +8,26 @@ import { loadProducts, loadProductsFetch } from "./data/products.js";
 /* async is a shortcut for promises */
 // await lets us write asynchronous code like normal code. we can replace .then() at the end of a promise, with await at the front of the promise. (await loadProducts). we can use await only in an asynch function.
 async function loadPage() {
-    console.log('load page');
-
-    await loadProductsFetch();
+    try{
+        await loadProductsFetch();
+    }
+    catch(error){
+        console.log('There was a problem loading the page. Please refresh or try again later.');
+    }
     
     renderCheckoutHeader();
     renderOrderSummary();
     renderPaymentSummary();
 }
 
+loadPage();
+
 /*
 asynch returns a promise. it's a shortcut for the code below.
 
+reject() is a function that enables us to use errors asynchronously
 function loadPage(){
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
         resolve();
     });
 }
@@ -49,11 +55,11 @@ function loadPage(){
 //     renderPaymentSummary();
 // });
 
-loadProductsFetch().then(() => {
-    renderCheckoutHeader();
-    renderOrderSummary();
-    renderPaymentSummary();
-});
+// loadProductsFetch().then(() => {
+//     renderCheckoutHeader();
+//     renderOrderSummary();
+//     renderPaymentSummary();
+// });
 
 // loadProducts(() => {
 //     renderCheckoutHeader();
