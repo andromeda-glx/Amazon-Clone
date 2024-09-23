@@ -7,18 +7,18 @@ export const deliveryOptions =
         deliveryDays: 7,
         deliveryPriceCents: 0
     },
+    // {
+    //     id: '2',
+    //     deliveryDays: 5,
+    //     deliveryPriceCents: 259
+    // },
     {
         id: '2',
-        deliveryDays: 5,
-        deliveryPriceCents: 259
-    },
-    {
-        id: '3',
         deliveryDays: 3,
         deliveryPriceCents: 499
     },
     {
-        id: '4',
+        id: '3',
         deliveryDays: 1,
         deliveryPriceCents: 999
     }

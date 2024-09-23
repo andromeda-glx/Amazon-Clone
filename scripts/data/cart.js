@@ -17,11 +17,11 @@ export class Cart {
         localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
     }
 
-    addProductToTheCart(id, quantity) {
+    addProductToTheCart(productId, quantity) {
         let isFound = false;
 
         this.cartItems.forEach(item => {
-            if (item.id === id) {
+            if (item.productId === productId) {
                 item.quantity += quantity;
                 isFound = true;
             }
@@ -29,7 +29,7 @@ export class Cart {
 
         if (!isFound) {
             this.cartItems.push({
-                id,
+                productId,
                 quantity,
                 deliveryOptionId: '1'
             });
@@ -40,7 +40,7 @@ export class Cart {
 
     deleteCartItem(itemId) {
         this.cartItems.forEach((product, index) => {
-            if (product.id === itemId)
+            if (product.productId === itemId)
                 this.cartItems.splice(index, 1);
         });
 
@@ -56,7 +56,7 @@ export class Cart {
 
     updateProductQuantity(productId, quantity) {
         this.cartItems.forEach((item, index) => {
-            if (productId === item.id) {
+            if (productId === item.productId) {
                 if (quantity >= 0 && quantity < 1000) {
                     this.cartItems[index].quantity = quantity;
                     this.saveCartToLocalStorage();
@@ -67,7 +67,7 @@ export class Cart {
 
     updateDeliveryOptionId(productId, newId) {
         this.cartItems.forEach((item, index) => {
-            if (item.id === productId) {
+            if (item.productId === productId) {
                 if (Number(newId) > 0 && Number(newId) <= deliveryOptions.length) {
                     this.cartItems[index].deliveryOptionId = newId;
                     this.saveCartToLocalStorage();

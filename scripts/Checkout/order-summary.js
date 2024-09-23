@@ -11,7 +11,7 @@ export function generateOrderSummaryHTML() {
     orderItemsHTML.innerHTML = '';
 
     cart.cartItems.forEach(cartItem => {
-        const product = findProduct(cartItem.id);
+        const product = findProduct(cartItem.productId);
         const deliveryOptionId = cartItem.deliveryOptionId;
         let deliveryDate = '';
 
@@ -21,19 +21,19 @@ export function generateOrderSummaryHTML() {
         });
 
         orderItemsHTML.innerHTML += `
-                <div class="order-item js-order-item-${product.id}">
+                <div class="order-item js-order-item-${product.productId}">
                     <h3>Delivery Date: ${calculateDeliveryDate(deliveryDate.deliveryDays)}</h3>
                     <div class="order-details-grid">
                         <img class="item-img" src="${product.image}" alt="">
-                        <div class="item-details-${product.id}">
-                            <div class="item-name js-item-name-${product.id}">${product.name}</div>
-                            <div class="item-price js-item-price-${product.id}">$${product.getPrice()}</div>
-                            <div class="item-quantity js-item-quantity-${product.id}">Quantity: ${cartItem.quantity}</div>
+                        <div class="item-details-${product.productId}">
+                            <div class="item-name js-item-name-${product.productId}">${product.name}</div>
+                            <div class="item-price js-item-price-${product.productId}">$${product.getPrice()}</div>
+                            <div class="item-quantity js-item-quantity-${product.productId}">Quantity: ${cartItem.quantity}</div>
                             <div class="item-update-delete">
-                                <span class="item-update primary-link" data-product-id="${product.id}">Update</span>
-                                <input class="quantity-input js-quantity-input-${product.id}" type="text">
-                                <span class="save-quantity-link primary-link" data-product-id="${product.id}">Save</span>
-                                <span class="item-delete primary-link js-item-delete js-item-delete-${product.id}" data-product-id="${product.id}">Delete</span>
+                                <span class="item-update primary-link" data-product-id="${product.productId}">Update</span>
+                                <input class="quantity-input js-quantity-input-${product.productId}" type="text">
+                                <span class="save-quantity-link primary-link" data-product-id="${product.productId}">Save</span>
+                                <span class="item-delete primary-link js-item-delete js-item-delete-${product.productId}" data-product-id="${product.productId}">Delete</span>
                             </div>
                         </div>
                         <div class="item-delivery-options">
