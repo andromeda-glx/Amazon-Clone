@@ -12,7 +12,7 @@ describe('test suite: addToCart', () => {
 
         spyOn(localStorage, 'getItem').and.callFake(() => {
             return JSON.stringify([{
-                id: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
+                productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
                 quantity: 1,
                 deliveryOptionId: '1'
             }]);
@@ -25,11 +25,11 @@ describe('test suite: addToCart', () => {
         expect(cart.cartItems.length).toEqual(1);
         expect(cart.cartItems[0].quantity).toEqual(2);
         expect(localStorage.setItem).toHaveBeenCalledTimes(1);
-        expect(cart.cartItems[0].id).toEqual('e43638ce-6aa0-4b85-b27f-e1d07eb678c6');
+        expect(cart.cartItems[0].productId).toEqual('e43638ce-6aa0-4b85-b27f-e1d07eb678c6');
         expect(cart.cartItems[0].deliveryOptionId).toEqual('1');
 
         expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify([{
-            id: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
+            productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
             quantity: 2,
             deliveryOptionId: '1'
         }])
@@ -54,13 +54,13 @@ describe('test suite: addToCart', () => {
         /* (4) with this code, we can see how many times localStorage.setItem was called. */
         expect(localStorage.setItem).toHaveBeenCalledTimes(1);
 
-        expect(cart.cartItems[0].id).toEqual('e43638ce-6aa0-4b85-b27f-e1d07eb678c6');
+        expect(cart.cartItems[0].productId).toEqual('e43638ce-6aa0-4b85-b27f-e1d07eb678c6');
         expect(cart.cartItems[0].quantity).toEqual(1);
         expect(cart.cartItems[0].deliveryOptionId).toEqual('1');
 
 
         expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify([{
-            id: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
+            productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
             quantity: 1,
             deliveryOptionId: '1'
         }]));
@@ -73,7 +73,7 @@ describe('test suite: removeFromCart', () => {
         spyOn(localStorage, 'getItem').and.callFake(() => {
             return JSON.stringify([
                 {
-                    id: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
+                    productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
                     quantity: 2,
                     deliveryOptionId: '2'
                 }
@@ -97,7 +97,7 @@ describe('test suite: removeFromCart', () => {
         expect(cart.cartItems.length).toEqual(1);
         expect(localStorage.setItem).toHaveBeenCalledTimes(1);
         expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify([{
-            id: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
+            productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
             quantity: 2,
             deliveryOptionId: '2'
         }]));
@@ -111,7 +111,7 @@ describe('test suite: updateDeliveryOptionId', () => {
         spyOn(localStorage, 'setItem');
         spyOn(localStorage, 'getItem').and.callFake(() => {
             return JSON.stringify([{
-                id: productId,
+                productId: productId,
                 quantity: 2,
                 deliveryOptionId: '2'
             }]);
@@ -121,26 +121,26 @@ describe('test suite: updateDeliveryOptionId', () => {
     });
 
     it('updates product\'s delivery option id', () => {
-        cart.updateDeliveryOptionId(productId, '4');
+        cart.updateDeliveryOptionId(productId, '3');
         
         expect(localStorage.setItem).toHaveBeenCalledTimes(1);
         expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify([{
-            id: productId,
+            productId: productId,
             quantity: 2,
-            deliveryOptionId: '4'
+            deliveryOptionId: '3'
         }]));
 
         expect(cart.cartItems.length).toEqual(1);
-        expect(cart.cartItems[0].id).toEqual(productId);
+        expect(cart.cartItems[0].productId).toEqual(productId);
         expect(cart.cartItems[0].quantity).toEqual(2);
-        expect(cart.cartItems[0].deliveryOptionId).toEqual('4');
+        expect(cart.cartItems[0].deliveryOptionId).toEqual('3');
     })
 
     it('does not update product\'s invalid delivery option id', () => {
         cart.updateDeliveryOptionId(productId, '0');
         
         expect(cart.cartItems.length).toEqual(1);
-        expect(cart.cartItems[0].id).toEqual(productId);
+        expect(cart.cartItems[0].productId).toEqual(productId);
         expect(cart.cartItems[0].quantity).toEqual(2);
         expect(cart.cartItems[0].deliveryOptionId).not.toEqual('0');
 
@@ -151,7 +151,7 @@ describe('test suite: updateDeliveryOptionId', () => {
         cart.updateDeliveryOptionId('non-existing-product-id', '4');
 
         expect(cart.cartItems.length).not.toEqual(2);
-        expect(cart.cartItems[0].id).toEqual(productId);
+        expect(cart.cartItems[0].productId).toEqual(productId);
         expect(cart.cartItems[0].quantity).toEqual(2);
         expect(cart.cartItems[0].deliveryOptionId).not.toEqual('4');
         

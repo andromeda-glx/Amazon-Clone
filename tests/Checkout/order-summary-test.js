@@ -30,14 +30,14 @@ describe('test suite: generateOrderSummaryHTML', () => {
         spyOn(localStorage, 'getItem').and.callFake(() => {
             return JSON.stringify([
                 {
-                    id: productId1,
+                    productId: productId1,
                     quantity: 2,
                     deliveryOptionId: '1'
                 },
                 {
-                    id: productId2,
+                    productId: productId2,
                     quantity: 1,
-                    deliveryOptionId: '3'
+                    deliveryOptionId: '2'
                 }
             ]);
         });
@@ -101,7 +101,7 @@ describe('test suite: generateOrderSummaryHTML', () => {
         ).toEqual(1);
 
         expect(
-            cart.cartItems[0].id
+            cart.cartItems[0].productId
         ).toEqual(productId2);
 
         expect(document.querySelector(`.js-item-name-${productId2}`).innerText).toEqual('Intermediate Size Basketball');
@@ -110,17 +110,17 @@ describe('test suite: generateOrderSummaryHTML', () => {
     });
 
     it('updates delivery option', () => {
-        const deliveryBtn = document.querySelector(`.js-delivery-option-${productId1}-4`);
+        const deliveryBtn = document.querySelector(`.js-delivery-option-${productId1}-3`);
 
         deliveryBtn.click();
 
         expect(deliveryBtn.checked).toEqual(true);
         expect(cart.cartItems.length).toEqual(2);
 
-        expect(cart.cartItems[0].id).toEqual(productId1);
-        expect(cart.cartItems[0].deliveryOptionId).toEqual('4');
-        expect(cart.cartItems[1].id).toEqual(productId2);
-        expect(cart.cartItems[1].deliveryOptionId).toEqual('3');
+        expect(cart.cartItems[0].productId).toEqual(productId1);
+        expect(cart.cartItems[0].deliveryOptionId).toEqual('3');
+        expect(cart.cartItems[1].productId).toEqual(productId2);
+        expect(cart.cartItems[1].deliveryOptionId).toEqual('2');
 
         expect(document.querySelector('.js-total-shipping-price').innerText).toEqual('$14.98');
         expect(document.querySelector('.js-total-price-with-tax').innerText).toEqual('$63.50');
