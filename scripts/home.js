@@ -1,9 +1,12 @@
 import { cart } from './data/cart.js';
 import { products, loadProducts } from './data/products.js';
+import { updateCartQuantity } from "./utils/update-cart-quantity.js";
+import { generateDefaultHeader } from "./utils/amazon-default-header.js";
 
 loadProducts(renderProductsGrid);
 
 function renderProductsGrid() {
+    generateDefaultHeader();
     generateDataStructureHTML();
     addToCartEventListener();
     updateCartQuantity();
@@ -81,8 +84,4 @@ function addToCartEventListener() {
 
 function getProductQuantity(productId) {
     return Number(document.querySelector(`.js-quantity-selector-${productId}`).value);
-}
-
-function updateCartQuantity() {
-    document.querySelector('.js-cart-quantity').innerHTML = cart.getCartTotalQuantity();
 }

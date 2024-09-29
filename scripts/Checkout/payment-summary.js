@@ -64,10 +64,10 @@ function generatePaymentSummaryHTML() {
 
                 const order = await respons.json();
                 addToOrders(order);
+                cart.clear();
             }
             catch(error){
-                console.log('Unexpected error. Try again later.');
-                
+                console.log('Unexpected error. Try again later.');   
             }
 
             /* changes the current page to a different URL */

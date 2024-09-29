@@ -18,154 +18,16 @@
 
 <body>
     <header>
-        <div class="header-left-section">
-            <a class="header-link" href="./index.html">
-                <img class="amazon-home-logo" src="./images/amazon-logo-white.png" alt="">
-                <img class="amazon-home-logo-sm" src="./images/amazon-mobile-logo-white.png" alt="">
-            </a>
-        </div>
-        <div class="header-middle-section">
-            <input class="search-bar" type="text" placeholder="Search">
-            <button class="search-btn">
-                <img class="search-icon" src="./images/icons/search-icon.png" alt="">
-            </button>
-        </div>
-        <div class="header-right-section">
-            <a class="header-link" href="./orders.html">
-                <span class="returns-text">Returns</span>
-                <span class="orders-text">& Orders</span>
-            </a>
-
-            <a class="header-link cart-section" href="./checkout.html">
-                <img class="cart-logo" src="./images/icons/cart-icon.png" alt="">
-                <div class="cart-quantity">3</div>
-                <div class="cart-text">Cart</div>
-            </a>
-        </div>
-        <div class="hamburger-btn">
-            <img src="./images/icons/hamburger-menu.png" alt="">
-        </div>
     </header>
 
     <main>
         <h1>Your orders</h1>
 
-        <div class="orders-grid">
-            <div class="order-c">
-                <div class="order-header">
-                    <div class="order-header-left-section order-header-section">
-                        <div class="order-header-title">Order Placed:</div>
-                        <div>August 12</div>
-                    </div>
-                    <div class="order-header-middle-section order-header-section">
-                        <div class="order-header-title">Total:</div>
-                        <div>$35.06</div>
-                    </div>
-                    <div class="order-header-right-section order-header-section">
-                        <div class="order-header-title">Order ID:</div>
-                        <div>27cba69d-4c3d-4098-b42d-ac7fa62b7664</div>
-                    </div>
-                </div>
-                <div class="order-body">
-                    <div class="order-item">
-                        <div class="order-item-img">
-                            <img src="./images/products/athletic-cotton-socks-6-pairs.jpg" alt="">
-                        </div>
-                        <div class="order-item-details">
-                            <div class="order-name">Black and Gray Athletic Cotton Socks - 6 Pairs</div>
-                            <div class="order-delivery-time">
-                                Arriving on: August 15
-                            </div>
-                            <div class="order-quantity">
-                                Quantity: 1
-                            </div>
-                            <div class="order-rebuy-btn">
-                                <button>
-                                    <img src="./images/icons/buy-again.png" alt="">
-                                    <div>Buy it again</div>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="order-item-track-btn">
-                            <a href="./tracking.html?orderId=123&productId=456">
-                                <button>Track package</button>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="order-item">
-                        <div class="order-item-img">
-                            <img src="./images/products/adults-plain-cotton-tshirt-2-pack-teal.jpg" alt="">
-                        </div>
-                        <div class="order-item-details">
-                            <div class="order-name">Adults Plain Cotton T-Shirt - 2 Pack</div>
-                            <div class="order-delivery-time">
-                                Arriving on: August 19
-                            </div>
-                            <div class="order-quantity">
-                                Quantity: 2
-                            </div>
-                            <div class="order-rebuy-btn">
-                                <button>
-                                    <img src="./images/icons/buy-again.png" alt="">
-                                    <div>Buy it again</div>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="order-item-track-btn">
-                            <a href="./tracking.html">
-                                <button>Track package</button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="order-c">
-                <div class="order-header">
-                    <div class="order-header-left-section order-header-section">
-                        <div class="order-header-title">Order Placed:</div>
-                        <div>June 10</div>
-                    </div>
-                    <div class="order-header-middle-section order-header-section">
-                        <div class="order-header-title">Total:</div>
-                        <div>$41.90</div>
-                    </div>
-                    <div class="order-header-right-section order-header-section">
-                        <div class="order-header-title">Order ID:</div>
-                        <div>b6b6c212-d30e-4d4a-805d-90b52ce6b37d</div>
-                    </div>
-                </div>
-                <div class="order-body">
-                    <div class="order-item">
-                        <div class="order-item-img">
-                            <img src="./images/products/intermediate-composite-basketball.jpg" alt="">
-                        </div>
-                        <div class="order-item-details">
-                            <div class="order-name">Intermediate Size Basketball</div>
-                            <div class="order-delivery-time">
-                                Arriving on: June 17
-                            </div>
-                            <div class="order-quantity">
-                                Quantity: 2
-                            </div>
-                            <div class="order-rebuy-btn">
-                                <button>
-                                    <img src="./images/icons/buy-again.png" alt="">
-                                    <div>Buy it again</div>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="order-item-track-btn">
-                            <a href="./tracking.html">
-                                <button>Track package</button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="orders-grid js-orders-grid">
         </div>
     </main>
+
+    <script src="./scripts/orders.js" type="module"></script>
 </body>
 
 </html>

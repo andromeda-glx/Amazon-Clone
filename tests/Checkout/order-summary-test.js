@@ -2,7 +2,7 @@
 
 import { renderOrderSummary } from "../../scripts/Checkout/order-summary.js";
 import { cart } from "../../scripts/data/cart.js";
-import { loadProducts } from "../../scripts/data/products.js";
+import { loadProducts, loadProductsFetch } from "../../scripts/data/products.js";
 
 describe('test suite: generateOrderSummaryHTML', () => {
     /* Hooks let us run some code fore each test */
@@ -12,10 +12,15 @@ describe('test suite: generateOrderSummaryHTML', () => {
 
     /* beforeAll Hook, will reun its parameter function before all the test (1 time)*/
     /* done() is a Jasmine function which will stop the code compilation process until its called */
-    beforeAll((done) => {
-        loadProducts(() => {
-            done();
-        });
+
+    // beforeAll((done) => {
+    //     loadProducts(() => {
+    //         done();
+    //     });
+    // });
+
+    beforeAll(async () => {
+        await loadProductsFetch();
     });
 
     beforeEach(() => {

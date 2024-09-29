@@ -3,13 +3,20 @@ import { renderPaymentSummary } from "./Checkout/payment-summary.js";
 import { renderCheckoutHeader } from "./Checkout/checkout-header.js";
 // import "./data/car.js";
 // import "./backend-practice.js";
-import { loadProducts, loadProductsFetch } from "./data/products.js";
+import { loadProductsFetch } from "./data/products.js";
+import { loadCart, loadCartFetch } from "./data/cart.js";
 
 /* async is a shortcut for promises */
 // await lets us write asynchronous code like normal code. we can replace .then() at the end of a promise, with await at the front of the promise. (await loadProducts). we can use await only in an asynch function.
 async function loadPage() {
     try{
-        await loadProductsFetch();
+        // await loadProductsFetch();
+        // await loadCartFetch();
+
+        await Promise.all([
+            loadProductsFetch(),
+            loadCartFetch()
+        ]);
     }
     catch(error){
         console.log('There was a problem loading the page. Please refresh or try again later.');
