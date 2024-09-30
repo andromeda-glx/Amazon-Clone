@@ -4,6 +4,7 @@ import { orders } from "./data/orders.js";
 import dayjs from 'https://unpkg.com/dayjs@1.11.13/esm/index.js';
 import convertCentsToDollars from "./utils/money.js";
 import { findProduct, loadProductsFetch } from "./data/products.js";
+import { cart } from "./data/cart.js";
 
 renderOrdersPage();
 
@@ -13,6 +14,7 @@ async function renderOrdersPage(){
     generateDefaultHeader();
     updateCartQuantity();
     generateOrdersHTML();
+    addEventsToRebuyButtons();
 }
 
 function generateOrdersHTML() {
@@ -39,7 +41,7 @@ function generateOrdersHTML() {
                     </div>
                 </div>
                 <div class="order-body">
-                    ${generateOrderItems(order.products)}
+                    ${generateOrderItems(order.id, order.products)}
                 </div>
             </div>
         `
@@ -50,7 +52,7 @@ function formatDeliveryDate(deliveryDate) {
     return dayjs(deliveryDate).format('MMM D');
 }
 
-function generateOrderItems(orderItems){
+function generateOrderItems(orderId, orderItems){
     let orderItemsHTML = '';
 
     orderItems.forEach(item => {
@@ -70,14 +72,14 @@ function generateOrderItems(orderItems){
                         Quantity: ${item.quantity}
                     </div>
                     <div class="order-rebuy-btn">
-                        <button>
+                        <button class="js-rebuy-btn" data-product-id="${product.id}" data-item-quantity="${item.quantity}">
                             <img src="./images/icons/buy-again.png" alt="">
                             <div>Buy it again</div>
                         </button>
                     </div>
                 </div>
                 <div class="order-item-track-btn">
-                    <a href="./tracking.html?orderId=123&productId=456">
+                    <a href="./tracking.html?orderId=${orderId}&productId=${product.id}">
                         <button>Track package</button>
                     </a>
                 </div>
@@ -86,4 +88,25 @@ function generateOrderItems(orderItems){
     });
 
     return orderItemsHTML;
+}
+
+function addEventsToRebuyButtons(){
+    const buttons = document.querySelectorAll('.js-rebuy-btn');
+
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            cart.addProductToTheCart(button.dataset.productId, Number(button.dataset.itemQuantity));
+            updateCartQuantity();
+
+            button.innerHTML = 'Added';
+
+            setTimeout(() => {
+                button.innerHTML = 
+                `
+                    <img src="./images/icons/buy-again.png" alt="">
+                    <div>Buy it again</div>
+                `
+            }, 1000);
+        });
+    });
 }
