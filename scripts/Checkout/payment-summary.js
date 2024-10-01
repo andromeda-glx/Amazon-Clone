@@ -2,9 +2,10 @@ import { cart } from "../data/cart.js";
 import { findDeliveryOption } from "../data/delivery-options.js";
 import { findProduct } from "../data/products.js";
 import convertCentsToDollars from "../utils/money.js";
-import { addToOrders, orders } from "../data/orders.js";
+import { addToOrders, loadOrders } from "../data/orders.js";
 
 export function renderPaymentSummary() {
+    loadOrders();
     generatePaymentSummaryHTML();
 }
 
@@ -62,16 +63,20 @@ function generatePaymentSummaryHTML() {
                     })
                 });
 
+                if (respons.status >= 400){
+                    throw respons;
+                }
+
                 const order = await respons.json();
                 addToOrders(order);
                 cart.clear();
+                
+            /* changes the current page to a different URL */
+            window.location.href = 'orders.html';
             }
             catch(error){
                 console.log('Unexpected error. Try again later.');   
             }
-
-            /* changes the current page to a different URL */
-            window.location.href = 'orders.html';
     })
 }
 

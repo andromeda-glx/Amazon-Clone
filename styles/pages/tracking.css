@@ -41,7 +41,7 @@ main a{
     font-size: 20px;
 }
 
-.status-title-shipped{
+.current-status-title{
     color: green;
 }
 
@@ -56,5 +56,4 @@ main a{
     background-color: green;
     height: 30px;
     border-radius: 20px;
-    width: 50%;
 }

@@ -1,6 +1,6 @@
 import { updateCartQuantity } from "./utils/update-cart-quantity.js";
 import { generateDefaultHeader } from "./utils/amazon-default-header.js";
-import { orders } from "./data/orders.js";
+import { loadOrders, orders } from "./data/orders.js";
 import dayjs from 'https://unpkg.com/dayjs@1.11.13/esm/index.js';
 import convertCentsToDollars from "./utils/money.js";
 import { findProduct, loadProductsFetch } from "./data/products.js";
@@ -10,6 +10,7 @@ renderOrdersPage();
 
 async function renderOrdersPage(){
     await loadProductsFetch();
+    loadOrders();
 
     generateDefaultHeader();
     updateCartQuantity();
@@ -21,7 +22,6 @@ function generateOrdersHTML() {
     const ordersGridElement = document.querySelector('.js-orders-grid');
 
     orders.forEach(order => {
-        console.log(order);
         
         ordersGridElement.innerHTML += 
         `
