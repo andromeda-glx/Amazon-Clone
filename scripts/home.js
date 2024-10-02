@@ -1,5 +1,5 @@
 import { cart } from './data/cart.js';
-import { products, loadProducts, filterProductsByName, filterProductsByKeywords } from './data/products.js';
+import { products, loadProducts } from './data/products.js';
 import { updateCartQuantity } from "./utils/update-cart-quantity.js";
 import { generateDefaultHeader } from "./utils/amazon-default-header.js";
 

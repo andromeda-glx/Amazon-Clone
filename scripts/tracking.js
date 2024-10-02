@@ -26,11 +26,11 @@ function generateOrderItem(){
     const product = findProduct(productId);
     const productDeliveryDetails = order.getProduct(productId);
     const quantity = productDeliveryDetails.quantity;
-    const deliveryDate = productDeliveryDetails.estimatedDeliveryTime;
+    let deliveryDate = productDeliveryDetails.estimatedDeliveryTime;
 
     orderItemHTML.innerHTML = 
     `
-        <h2>Arriving on ${dayjs(deliveryDate).format('dddd, MMMM D')}</h2>
+        <h2>${dayjs() > dayjs(deliveryDate) ? 'Delivered' : 'Arriving'} on ${dayjs(deliveryDate).format('dddd, MMMM D')}</h2>
         <div class="order-name">
             ${product.name}
         </div>
