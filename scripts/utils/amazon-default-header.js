@@ -7,8 +7,8 @@ export function generateDefaultHeader() {
             </a>
         </div>
         <div class="header-middle-section">
-            <input class="search-bar" type="text" placeholder="Search Amazon Clone">
-            <button class="search-btn">
+            <input class="search-bar js-search-bar" type="text" placeholder="Search Amazon Clone">
+            <button class="search-btn js-search-btn">
                 <img class="search-icon" src="./images/icons/search-icon.png" alt="">
             </button>
         </div>
@@ -28,4 +28,25 @@ export function generateDefaultHeader() {
             <img src="./images/icons/hamburger-menu.png" alt="">
         </div>
     `;
+
+    addSearchEventListener();
+}
+
+function addSearchEventListener(){
+
+    document.querySelector('.js-search-btn').addEventListener('click', () => searchAmazonClone());
+
+    document.querySelector('.js-search-bar').addEventListener('keypress', (event) => {
+        if (event.key === 'Enter'){
+            searchAmazonClone();
+        }
+    });
+}
+
+function searchAmazonClone(){
+    const searchbarValue = document.querySelector('.js-search-bar').value;
+
+    if (searchbarValue && searchbarValue.trim() !== ''){
+        window.location.href = `./index.html?search=${searchbarValue}`;
+    }
 }

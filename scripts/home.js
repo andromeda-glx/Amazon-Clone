@@ -13,10 +13,20 @@ function renderProductsGrid() {
 }
 
 function generateDataStructureHTML() {
+    const url = new URL(window.location.href);
+    const searchParam = url.searchParams.get('search');
+    let filteredList = products;
+
+    if(searchParam){
+        filteredList = products.filter(product => {
+            return product.name.toLowerCase().includes(searchParam.toLowerCase());
+        });
+    }
+
     const productsContainer = document.querySelector('.js-products-grid');
     let productsString = '';
 
-    products.forEach(product => {
+    filteredList.forEach(product => {
         productsString += `
         
             <div class="product-c">
