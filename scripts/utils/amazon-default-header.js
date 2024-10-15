@@ -7,7 +7,7 @@ export function generateDefaultHeader() {
             </a>
         </div>
         <div class="header-middle-section">
-            <input class="search-bar js-search-bar" type="text" placeholder="Search Amazon Clone">
+            <input class="search-bar js-search-bar" type="search" placeholder="Search Amazon Clone">
             <button class="search-btn js-search-btn">
                 <img class="search-icon" src="./images/icons/search-icon.png" alt="">
             </button>
